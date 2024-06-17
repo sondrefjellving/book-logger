@@ -14,6 +14,7 @@ func startCLI(cfg *config) {
 }
 
 func showMenu(commands map[int]Command) {
+	fmt.Println("MAIN MENU")
 	numMenuCommands := len(commands)
 	for i := 1; i <= numMenuCommands; i++ {
 		fmt.Printf("%v - %s\n", i, commands[i].name)
@@ -23,7 +24,9 @@ func showMenu(commands map[int]Command) {
 func pickOption(commands map[int]Command, cfg *config) {
 	fmt.Println()
 
-	option := GetIntFromPrompt("Choose option")
+	optionPrompt := fmt.Sprintf("Choose option (%v-%v)", 1, len(commands))
+	option := GetIntFromPrompt(optionPrompt)
+	fmt.Println()
 	if isValidOption(option, len(commands)) {
 		fmt.Println("Please type a number in the correct range")
 		fmt.Println()
