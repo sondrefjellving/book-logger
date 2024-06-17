@@ -2,7 +2,7 @@ package main
 
 type Command struct {
 	name 			string
-	callback 		func() (error)
+	callback 		func(cfg *config) (error)
 }
 
 func GetCommands() map[int]Command {

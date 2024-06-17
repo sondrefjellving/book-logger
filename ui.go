@@ -1,18 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-	"strconv"
 )
 
-func startUI() {
+func startCLI(cfg *config) {
 	commands := GetCommands()
 	welcomeUser()
 	for {
 		showMenu(commands)
-		pickOption(commands)
+		pickOption(commands, cfg)
 	}
 }
 
@@ -23,23 +20,17 @@ func showMenu(commands map[int]Command) {
 	}
 }
 
-func pickOption(commands map[int]Command) {
-	fmt.Print("Choose option: ")
-
-	reader := bufio.NewScanner(os.Stdin)
-	reader.Scan()
-	input := reader.Text()
+func pickOption(commands map[int]Command, cfg *config) {
 	fmt.Println()
 
-	option, err := getIntOption(input)
-	if isValidOption(err, option, len(commands)) {
+	option := GetIntFromPrompt("Choose option")
+	if isValidOption(option, len(commands)) {
 		fmt.Println("Please type a number in the correct range")
 		fmt.Println()
 		return
 	}
 
-	fmt.Println()
-	commands[option].callback()
+	commands[option].callback(cfg)
 	fmt.Println()
 }
 
@@ -48,14 +39,6 @@ func welcomeUser() {
 	fmt.Println()
 }
 
-func getIntOption(input string) (int, error) {
-	i, err := strconv.Atoi(input)
-	if err != nil {
-		return 0, err
-	}
-	return i, nil
-}
-
-func isValidOption(failedConversion error, option, numCommands int) bool {
-	return failedConversion != nil || option < 1 || option > numCommands
+func isValidOption(option, numCommands int) bool {
+	return option < 1 || option > numCommands
 }

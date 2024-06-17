@@ -1,5 +1,12 @@
 package main
 
+type config struct {
+	books []Book
+}
+
 func main() {
-	startUI()
+	cfg := config{
+		books: make([]Book, 0),
+	}
+	startCLI(&cfg)
 }

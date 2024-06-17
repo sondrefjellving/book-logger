@@ -2,7 +2,7 @@ package main
 
 import "os"
 
-func commandQuit() error {
+func commandQuit(c *config) error {
 	os.Exit(0)
 	return nil
 }
