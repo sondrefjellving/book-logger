@@ -3,12 +3,10 @@ package main
 import (
 	"errors"
 	"fmt"
+
+	"github.com/sondrefjellving/book-logger/internal/data_types"
 )
 
-type Entry struct {
-	currentPage	int
-	summary		string
-}
 
 func commandAddEntry(c *config) error {
 	if len(c.books) == 0 {
@@ -18,7 +16,7 @@ func commandAddEntry(c *config) error {
 	fmt.Println()
 	fmt.Println("Pick a book")
 	for i, book := range c.books {
-		fmt.Printf("%v - %s\n", i+1, book.title)
+		fmt.Printf("%v - %s\n", i+1, book.Title)
 	}
 	optionPrompt := fmt.Sprintf("Pick (1-%v)", len(c.books))
 
@@ -35,12 +33,12 @@ func commandAddEntry(c *config) error {
 
 	currentPage := GetIntFromPrompt("Current page")
 	summary := GetStringFromPrompt("Summary")
-	todaysEntry := Entry{
-		currentPage: currentPage,
-		summary: summary,
+	todaysEntry := data_types.Entry{
+		CurrentPage: currentPage,
+		Summary: summary,
 	}
 
-	c.books[option-1].entries[getCurrentDate()] = todaysEntry
+	c.books[option-1].Entries[getCurrentDate()] = todaysEntry
 
 	fmt.Println()
 	fmt.Println("Added todays entry!")
