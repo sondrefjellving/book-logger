@@ -8,6 +8,7 @@ type Book struct {
 	title 		string
 	author 		string
 	numPages 	int
+	entries		map[string]Entry // TODO: check what type of date I should use
 }
 
 func commandAddBook(c *config) error {
@@ -22,6 +23,7 @@ func commandAddBook(c *config) error {
 		title: title,
 		author: author,
 		numPages: numPages,
+		entries: make(map[string]Entry),
 	})
 
 	return nil

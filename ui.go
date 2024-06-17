@@ -33,7 +33,10 @@ func pickOption(commands map[int]Command, cfg *config) {
 		return
 	}
 
-	commands[option].callback(cfg)
+	err := commands[option].callback(cfg)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 	fmt.Println()
 }
 

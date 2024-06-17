@@ -1,8 +1,5 @@
 package main
 
-type config struct {
-	books []Book
-}
 
 func main() {
 	cfg := config{
