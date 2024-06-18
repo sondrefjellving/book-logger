@@ -6,5 +6,5 @@ import (
 
 func getCurrentDate() string {
 	currentTime := time.Now()
-	return currentTime.Format("2022-22-3")
+	return currentTime.Format("2006-2-3")
 }

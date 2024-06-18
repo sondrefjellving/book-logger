@@ -27,7 +27,7 @@ func pickOption(commands map[int]Command, cfg *config) {
 	optionPrompt := fmt.Sprintf("Choose option (%v-%v)", 1, len(commands))
 	option := GetIntFromPrompt(optionPrompt)
 	fmt.Println()
-	if isValidOption(option, len(commands)) {
+	if !isValidOption(option, len(commands)) {
 		fmt.Println("Please type a number in the correct range")
 		fmt.Println()
 		return
@@ -46,5 +46,5 @@ func welcomeUser() {
 }
 
 func isValidOption(option, numCommands int) bool {
-	return option < 1 || option > numCommands
+	return 0 < option && option <= numCommands
 }

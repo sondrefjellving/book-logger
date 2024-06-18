@@ -10,9 +10,8 @@ type config struct {
 	books []data_types.Book
 }
 
-func (c *config) printBooks() {
-	fmt.Println("YOUR BOOKS")
-	for _, book := range c.books {
-		fmt.Printf("- %s\n", book.Title) // TODO: add pages read here maybe??
+func (c *config) printBooksWithProgress() {
+	for i, book := range c.books {
+		fmt.Printf("%d: %s (page %d/%d)\n", i+1, book.Title, book.GetCurrentPage(), book.NumPages)
 	}
 }
