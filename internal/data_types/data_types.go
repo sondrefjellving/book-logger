@@ -16,6 +16,7 @@ type Entry struct {
 	Summary		string
 }
 
+
 func (b *Book) AddEntry(entry Entry) {
 	b.Entries = append(b.Entries, entry)
 }

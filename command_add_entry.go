@@ -26,7 +26,9 @@ func commandAddEntry(c *config) error {
 		return nil
 	}
 
-	currentPage := GetIntFromPrompt("Current page")
+	chosenBook := &c.books[option-1]
+	currentProgress := chosenBook.GetCurrentPage()
+	currentPage := GetIntFromPromptInRange("Current page", currentProgress, chosenBook.NumPages)
 	summary := GetStringFromPrompt("Summary")
 
 	todaysEntry := data_types.Entry{
@@ -35,7 +37,7 @@ func commandAddEntry(c *config) error {
 		Summary: summary,
 	}
 
-	c.books[option-1].AddEntry(todaysEntry)
+	chosenBook.AddEntry(todaysEntry)
 
 	fmt.Println("Added todays entry!")
 	return nil

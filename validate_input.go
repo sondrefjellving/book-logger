@@ -36,7 +36,7 @@ func GetIntFromPrompt(prompt string) int {
 		reader.Scan()
 		input := reader.Text()
 		number, err := GetIntFromString(input)
-		if strings.Trim(input, " ") != "" && err == nil {
+		if strings.Trim(input, " ") != "" && err == nil && number > 0{
 			return number 
 		}
 		printInvalidInputText("Invalid input, try again..")
