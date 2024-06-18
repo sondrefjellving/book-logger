@@ -15,3 +15,9 @@ func main() {
 
 	startCLI(&cfg)
 }
+
+// TODOs
+// - refactor input validation (e.g: add entry command)
+// - make a ui file that has methods for writing menu titles
+// - refactor variable names to improve readability
+// - refactor add entry command into smaller functions

@@ -46,3 +46,19 @@ func GetIntFromPrompt(prompt string) int {
 		fmt.Println()
 	}
 }
+
+func GetIntFromPromptInRange(prompt string, lower, upper int) int {
+	for {
+		option := GetIntFromPrompt(prompt)
+		if isOptionInRange(option, lower, upper) {
+			return option
+		}
+		fmt.Println()
+		fmt.Println("Option is out of range, try again")
+		fmt.Println()
+	}
+}
+
+func isOptionInRange(option, lower, upper int) bool {
+	return lower <= option && option <= upper 
+}

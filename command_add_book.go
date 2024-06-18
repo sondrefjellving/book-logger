@@ -1,14 +1,11 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/sondrefjellving/book-logger/internal/data_types"
 )
 
 func commandAddBook(c *config) error {
-	fmt.Println("Add a new book")
-	fmt.Println()
+	PrintPageTitle("add a new book")
 
 	title := GetStringFromPrompt("Title")
 	author := GetStringFromPrompt("Author")

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func startCLI(cfg *config) {
@@ -14,7 +15,7 @@ func startCLI(cfg *config) {
 }
 
 func showMenu(commands map[int]Command) {
-	fmt.Println("MAIN MENU")
+	PrintPageTitle("main menu")
 	numMenuCommands := len(commands)
 	for i := 1; i <= numMenuCommands; i++ {
 		fmt.Printf("%v - %s\n", i, commands[i].name)
@@ -25,13 +26,8 @@ func pickOption(commands map[int]Command, cfg *config) {
 	fmt.Println()
 
 	optionPrompt := fmt.Sprintf("Choose option (%v-%v)", 1, len(commands))
-	option := GetIntFromPrompt(optionPrompt)
+	option := GetIntFromPromptInRange(optionPrompt, 1, len(commands))
 	fmt.Println()
-	if !isValidOption(option, len(commands)) {
-		fmt.Println("Please type a number in the correct range")
-		fmt.Println()
-		return
-	}
 
 	err := commands[option].callback(cfg)
 	if err != nil {
@@ -45,6 +41,7 @@ func welcomeUser() {
 	fmt.Println()
 }
 
-func isValidOption(option, numCommands int) bool {
-	return 0 < option && option <= numCommands
+func PrintPageTitle(title string) {
+	fmt.Println(strings.ToUpper(title))
+	fmt.Println()
 }

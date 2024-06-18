@@ -2,33 +2,25 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func commandViewProgress(c *config) error {
-	fmt.Println("YOUR BOOK PROGRESS")
-	fmt.Println("(pick a book to view your entries)")
-	fmt.Println()
+	PrintPageTitle("your book progress")
 	c.printBooksWithProgress() // add progress e.g: pages 291/401
-	numOptions := len(c.books)+1
-	fmt.Printf("%d: Go back to main menu\n", numOptions)
+
+	backToMenuOption := len(c.books)+1
+	fmt.Printf("%d: Go back to main menu\n", backToMenuOption)
 	fmt.Println()
 
-	option := 0
-	for {
-		option = GetIntFromPrompt("Option")
-		if isValidOption(option, numOptions) {
-			break
-		}
-	}
+	option := GetIntFromPromptInRange("Option", 1, backToMenuOption)
 
-	if option == numOptions { // go back to main menu
+	if option == backToMenuOption {
 		return nil
 	}
 	
 	bookPick := c.books[option-1]
 	fmt.Println()
-	fmt.Printf("YOUR ENTRIES FOR %s\n", strings.ToUpper(bookPick.Title))
+	PrintPageTitle("your entries for book") // add book title here later
 	bookPick.PrintEntries()
 	fmt.Println()	
 
