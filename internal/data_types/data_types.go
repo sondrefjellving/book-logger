@@ -7,12 +7,17 @@ type Book struct {
 	Title 		string
 	Author 		string
 	NumPages 	int
-	Entries		map[string]Entry 
+	Entries		[]Entry 
 }
 
 type Entry struct {
+	Date		string
 	CurrentPage	int
 	Summary		string
+}
+
+func (b *Book) AddEntry(entry Entry) {
+	b.Entries = append(b.Entries, entry)
 }
 
 func (b Book) GetCurrentPage() int {
@@ -26,7 +31,7 @@ func (b Book) GetCurrentPage() int {
 }
 
 func (b Book) PrintEntries() {
-	for date, entry := range b.Entries {
-		fmt.Printf("[%s]: %s\n", date, entry.Summary)
+	for _, entry := range b.Entries {
+		fmt.Printf("[%s], p.%d: %s\n", entry.Date, entry.CurrentPage, entry.Summary)
 	}
 }

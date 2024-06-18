@@ -18,7 +18,7 @@ func commandAddBook(c *config) error {
 		Title: title,
 		Author: author,
 		NumPages: numPages,
-		Entries: make(map[string]data_types.Entry),
+		Entries: make([]data_types.Entry, 0, 10),
 	})
 
 	return nil

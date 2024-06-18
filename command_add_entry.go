@@ -34,11 +34,12 @@ func commandAddEntry(c *config) error {
 	currentPage := GetIntFromPrompt("Current page")
 	summary := GetStringFromPrompt("Summary")
 	todaysEntry := data_types.Entry{
+		Date: getCurrentDate(),
 		CurrentPage: currentPage,
 		Summary: summary,
 	}
 
-	c.books[option-1].Entries[getCurrentDate()] = todaysEntry
+	c.books[option-1].AddEntry(todaysEntry)
 
 	fmt.Println()
 	fmt.Println("Added todays entry!")

@@ -9,8 +9,9 @@ func GetBooksMock() []data_types.Book {
 			Title: "Lord of The Rings",
 			Author: "JRR. Tolkien",
 			NumPages: 550,
-			Entries: map[string]data_types.Entry{
-				"2024-06-23": {
+			Entries: []data_types.Entry{
+				{
+					Date: "2024-06-23",
 					CurrentPage: 40,
 					Summary: "Frodo got the ring from Bilbo",
 				},
