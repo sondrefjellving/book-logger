@@ -14,12 +14,14 @@ func commandAddEntry(c *config) error {
 	}
 	PrintPageTitle("add entry")
 
-	fmt.Println("Choose a book to add an entry to")
+	fmt.Println("Choose a book")
 	c.printBooksWithProgress()
 
-	optionPrompt := fmt.Sprintf("Choose (1-%v)", len(c.books))
-	option := GetIntFromPromptInRange(optionPrompt, 1, len(c.books))
+	backToMenuOption := len(c.books)+1
+	PrintBackToMenuOption(backToMenuOption)
 
+	optionPrompt := GetChooseFromRangePrompt("Choose", backToMenuOption)
+	option := GetIntFromPromptInRange(optionPrompt, 1, backToMenuOption)
 	currentPage := GetIntFromPrompt("Current page")
 	summary := GetStringFromPrompt("Summary")
 
@@ -31,7 +33,6 @@ func commandAddEntry(c *config) error {
 
 	c.books[option-1].AddEntry(todaysEntry)
 
-	fmt.Println()
 	fmt.Println("Added todays entry!")
 	return nil
 }

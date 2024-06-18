@@ -9,8 +9,7 @@ func commandViewProgress(c *config) error {
 	c.printBooksWithProgress() 
 
 	backToMenuOption := len(c.books)+1
-	fmt.Printf("%d: Go back to main menu\n", backToMenuOption)
-	fmt.Println()
+	PrintBackToMenuOption(backToMenuOption)
 
 	option := GetIntFromPromptInRange("Option", 1, backToMenuOption)
 
