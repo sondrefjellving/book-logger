@@ -25,9 +25,7 @@ func GetStringFromPrompt(prompt string) string {
 		if strings.Trim(input, " ") != "" {
 			return input
 		}
-		fmt.Println()
-		fmt.Println("Invalid input, try again..")
-		fmt.Println()
+		printInvalidInputText("Invalid input, try again..")
 	}
 }
 
@@ -41,9 +39,7 @@ func GetIntFromPrompt(prompt string) int {
 		if strings.Trim(input, " ") != "" && err == nil {
 			return number 
 		}
-		fmt.Println()
-		fmt.Println("Invalid input, try again..")
-		fmt.Println()
+		printInvalidInputText("Invalid input, try again..")
 	}
 }
 
@@ -53,12 +49,16 @@ func GetIntFromPromptInRange(prompt string, lower, upper int) int {
 		if isOptionInRange(option, lower, upper) {
 			return option
 		}
-		fmt.Println()
-		fmt.Println("Option is out of range, try again")
-		fmt.Println()
+		printInvalidInputText("Option is out of range, try again")
 	}
 }
 
 func isOptionInRange(option, lower, upper int) bool {
 	return lower <= option && option <= upper 
+}
+
+func printInvalidInputText(message string) {
+		fmt.Println()
+		fmt.Println(message)
+		fmt.Println()
 }

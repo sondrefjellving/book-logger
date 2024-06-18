@@ -17,7 +17,7 @@ func main() {
 }
 
 // TODOs
-// - refactor input validation (e.g: add entry command)
-// - make a ui file that has methods for writing menu titles
+// - add a "choose in range prompt maker"
+// - add go back to menu option for add entry page
 // - refactor variable names to improve readability
 // - refactor add entry command into smaller functions
