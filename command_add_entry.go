@@ -22,6 +22,10 @@ func commandAddEntry(c *config) error {
 
 	optionPrompt := GetChooseFromRangePrompt("Choose", backToMenuOption)
 	option := GetIntFromPromptInRange(optionPrompt, 1, backToMenuOption)
+	if option == backToMenuOption {
+		return nil
+	}
+
 	currentPage := GetIntFromPrompt("Current page")
 	summary := GetStringFromPrompt("Summary")
 

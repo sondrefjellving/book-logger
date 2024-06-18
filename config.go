@@ -12,6 +12,6 @@ type config struct {
 
 func (c *config) printBooksWithProgress() {
 	for i, book := range c.books {
-		fmt.Printf("%d: %s (page %d/%d)\n", i+1, book.Title, book.GetCurrentPage(), book.NumPages)
+		fmt.Printf("%d - %s (page %d/%d)\n", i+1, book.Title, book.GetCurrentPage(), book.NumPages)
 	}
 }

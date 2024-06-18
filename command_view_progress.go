@@ -18,6 +18,10 @@ func commandViewProgress(c *config) error {
 	}
 	
 	bookPick := c.books[option-1]
+	if len(bookPick.Entries) == 0 {
+		fmt.Println("You have no entries on this book... yet")
+		return commandViewProgress(c)
+	}
 	fmt.Println()
 	PrintPageTitle("your entries for book") // add book title here later
 	bookPick.PrintEntries()

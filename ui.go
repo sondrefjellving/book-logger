@@ -25,7 +25,7 @@ func showMenu(commands map[int]Command) {
 func pickOption(commands map[int]Command, cfg *config) {
 	fmt.Println()
 
-	optionPrompt := fmt.Sprintf("Choose option (%v-%v)", 1, len(commands))
+	optionPrompt := GetChooseFromRangePrompt("Choose", len(commands))
 	option := GetIntFromPromptInRange(optionPrompt, 1, len(commands))
 	fmt.Println()
 
@@ -48,12 +48,13 @@ func PrintPageTitle(title string) {
 
 func GetChooseFromRangePrompt(prompt string, upper int) string {
 	if upper <= 1 {
-		return prompt + ": ";
+		return prompt;
 	}
-	return fmt.Sprintf("%s (1-%d): ", prompt, upper)
+	return fmt.Sprintf("%s (1-%d)", prompt, upper)
 }
 
 func PrintBackToMenuOption(optionNumber int) {
+	fmt.Println()
 	fmt.Printf("%d - Back to main menu\n", optionNumber)
 	fmt.Println()
 }
