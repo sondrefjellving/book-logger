@@ -15,3 +15,11 @@ func (c *config) printBooksWithProgress() {
 		fmt.Printf("%d - %s (page %d/%d)\n", i+1, book.Title, book.GetCurrentPage(), book.NumPages)
 	}
 }
+
+func (c *config) printTotalPagesRead() {
+	totalPages := 0
+	for _, book := range c.books {
+		totalPages += book.GetCurrentPage()
+	}
+	fmt.Printf("Total pages read: %d\n", totalPages)
+}

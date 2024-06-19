@@ -6,6 +6,7 @@ import (
 
 func commandViewProgress(c *config) error {
 	PrintPageTitle("your book progress")
+	c.printTotalPagesRead()
 	c.printBooksWithProgress() 
 
 	backToMenuOption := len(c.books)+1
