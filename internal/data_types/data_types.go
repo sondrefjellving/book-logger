@@ -32,7 +32,15 @@ func (b Book) GetCurrentPage() int {
 }
 
 func (b Book) PrintEntries() {
+	startPage := 0
 	for _, entry := range b.Entries {
-		fmt.Printf("[%s], p.%d: %s\n", entry.Date, entry.CurrentPage, entry.Summary)
+		fmt.Printf(
+			"[%s] p. %d-%d:\nSummary: %s\n\n", 
+			entry.Date, 
+			startPage, 
+			entry.CurrentPage, 
+			entry.Summary,
+		)
+		startPage = entry.CurrentPage
 	}
 }

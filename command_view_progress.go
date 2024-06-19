@@ -26,8 +26,6 @@ func commandViewProgress(c *config) error {
 	fmt.Println()
 	PrintPageTitle("your entries for book") // add book title here later
 	bookPick.PrintEntries()
-	fmt.Println()	
-
 	return nil
 }
 
