@@ -16,9 +16,17 @@ type Entry struct {
 	Summary		string
 }
 
-
 func (b *Book) AddEntry(entry Entry) {
 	b.Entries = append(b.Entries, entry)
+}
+
+func (b *Book) PrintBook() {
+	fmt.Printf(
+		"Title: %s\nAuthor: %s\nPages: %d\n",
+		b.Title,
+		b.Author,
+		b.NumPages,
+	)
 }
 
 func (b Book) GetCurrentPage() int {
