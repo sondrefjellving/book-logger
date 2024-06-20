@@ -1,6 +1,10 @@
 package data_types
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
 
 
 type Book struct {
@@ -14,6 +18,31 @@ type Entry struct {
 	Date		string
 	CurrentPage	int
 	Summary		string
+}
+
+
+func (b *Book) EditAuthor(author string) error {
+	if strings.Trim(author, " ") == "" {
+		return errors.New("author cannot be blank")
+	}
+	b.Author = author
+	return nil
+}
+
+func (b *Book) EditTitle(title string) error {
+	if strings.Trim(title, " ") == "" {
+		return errors.New("title cannot be blank")
+	}
+	b.Title = title 
+	return nil
+}
+
+func (b *Book) EditNumPages(numPages int) error {
+	if numPages < b.GetCurrentPage() {
+		return errors.New("number of pages cannot be lower than the page you are at")
+	}
+	b.NumPages = numPages 
+	return nil
 }
 
 func (b *Book) AddEntry(entry Entry) {

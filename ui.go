@@ -46,12 +46,6 @@ func PrintPageTitle(title string) {
 	fmt.Println()
 }
 
-func GetChooseFromRangePrompt(prompt string, upper int) string {
-	if upper <= 1 {
-		return prompt;
-	}
-	return fmt.Sprintf("%s (1-%d)", prompt, upper)
-}
 
 func PrintBackToMenuOption(optionNumber int) {
 	fmt.Println()
