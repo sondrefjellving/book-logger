@@ -20,10 +20,14 @@ func GetCommands() map[int]Command {
 			callback: commandEditBook,
 		},
 		4: {
+			name: "delete book",
+			callback: commandDeleteBook,
+		},
+		5: {
 			name: "view progress",
 			callback: commandViewProgress,
 		},
-		5: {
+		6: {
 			name: "quit",
 			callback: commandQuit,
 		},
