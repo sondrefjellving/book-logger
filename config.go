@@ -10,10 +10,6 @@ type config struct {
 	books []data_types.Book
 }
 
-func (c *config) editBook(bookIndex int, newBook data_types.Book) {
-	c.books[bookIndex] = newBook
-}
-
 func (c *config) printBooksWithProgress() {
 	for i, book := range c.books {
 		fmt.Printf("%d - %s (page %d/%d)\n", i+1, book.Title, book.GetCurrentPage(), book.NumPages)

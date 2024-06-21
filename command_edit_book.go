@@ -13,7 +13,6 @@ const (
 )
 
 func commandEditBook(c *config) error {
-	PrintPageTitle("edit book")
 	fmt.Println("Choose a book you want to edit")
 	c.printBooksWithProgress()
 
@@ -24,7 +23,7 @@ func commandEditBook(c *config) error {
 	if option == backToMenuOption {
 		return nil
 	}
-
+	fmt.Println()
 	printEditBookPage(c, option-1)
 	
 
@@ -34,8 +33,7 @@ func commandEditBook(c *config) error {
 
 func printEditBookPage(c *config, bookIndex int) {
 	chosenBook := &c.books[bookIndex]
-	PrintPageTitle(chosenBook.Title)
-	fmt.Println("Current:")
+	fmt.Println("Book info:")
 	chosenBook.PrintBook()
 	fmt.Println()
 
@@ -47,6 +45,7 @@ func printEditBookPage(c *config, bookIndex int) {
 	PrintBackToMenuOption(backToMenuOption)
 
 	option := GetIntFromPromptInRange("Chose what to edit", 1, backToMenuOption)
+	fmt.Println()
 	if option == backToMenuOption {
 		return
 	}
@@ -62,33 +61,37 @@ func printEditBookPage(c *config, bookIndex int) {
 			return
 	}
 
+	fmt.Println()
 	printEditBookPage(c, bookIndex)
 }
 
 func editAuthor(b *data_types.Book) {
 	fmt.Println("Current author: " + b.Author)
-	author := GetStringFromPrompt("Change to")
+	author := GetStringFromPrompt("New author")
 	if err := b.EditAuthor(author); err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Println()
 	fmt.Println("Author updated successfully")
 }
 func editTitle(b *data_types.Book) {
 	fmt.Println("Current title: " + b.Title)
-	title := GetStringFromPrompt("Change to")
+	title := GetStringFromPrompt("New title")
 	if err := b.EditTitle(title); err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Println()
 	fmt.Println("Title updated successfully")
 }
 func editNumPages(b *data_types.Book) {
 	fmt.Printf("Current number of pages: %d\n", b.NumPages)
-	numPages := GetIntFromPrompt("Change to")
+	numPages := GetIntFromPrompt("Change number of pages")
 	if err := b.EditNumPages(numPages); err != nil {
 		fmt.Println(err.Error())
 		return
 	}
+	fmt.Println()
 	fmt.Println("Number of pages updated successfully")
 }

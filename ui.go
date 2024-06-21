@@ -48,7 +48,6 @@ func PrintPageTitle(title string) {
 
 
 func PrintBackToMenuOption(optionNumber int) {
-	fmt.Println()
-	fmt.Printf("%d - Back to main menu\n", optionNumber)
+	fmt.Printf("%d - back to main menu\n", optionNumber)
 	fmt.Println()
 }
