@@ -1,17 +1,26 @@
 package main
 
 import (
+	"log"
+
 	"github.com/sondrefjellving/book-logger/internal/data_types"
-	mockdata "github.com/sondrefjellving/book-logger/internal/mock_data"
+	"github.com/sondrefjellving/book-logger/internal/database"
 )
 
 
 func main() {
-	cfg := config{
-		books: make([]data_types.Book, 0),
+	dbPath := "books.json"
+	db, err := database.NewDB(dbPath)
+	if err != nil {
+		log.Fatal("couldn't make db")
 	}
 
-	cfg.books = mockdata.GetBooksMock()	
+	cfg := config{
+		books: make([]data_types.Book, 0),
+		db: db,
+	}
+
+	cfg.setupMockData()
 
 	startCLI(&cfg)
 }

@@ -4,10 +4,13 @@ import (
 	"fmt"
 
 	"github.com/sondrefjellving/book-logger/internal/data_types"
+	"github.com/sondrefjellving/book-logger/internal/database"
+	mockdata "github.com/sondrefjellving/book-logger/internal/mock_data"
 )
 
 type config struct {
 	books []data_types.Book
+	db *database.DB
 }
 
 func (c *config) printBooksWithProgress() {
@@ -22,4 +25,18 @@ func (c *config) printTotalPagesRead() {
 		totalPages += book.GetCurrentPage()
 	}
 	fmt.Printf("Total pages read: %d\n", totalPages)
+}
+
+func (c *config) setupMockData() error {
+	dbStruct, err := c.db.LoadDB()
+	if err != nil {
+		return err
+	}
+
+	dbStruct.Books = append(dbStruct.Books, mockdata.GetBooksMock()...)
+	err = c.db.WriteDB(dbStruct)
+	if err != nil {
+		return err
+	}
+	return nil
 }

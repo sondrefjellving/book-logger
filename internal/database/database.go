@@ -39,10 +39,10 @@ func (db *DB) createDB() error {
 	dbStruct := DBStructure{
 		Books: make([]data_types.Book, 0),
 	}	
-	return db.writeDB(dbStruct)
+	return db.WriteDB(dbStruct)
 }
 
-func (db *DB) writeDB(payload interface{}) error {
+func (db *DB) WriteDB(payload interface{}) error {
 	db.mux.Lock()
 	defer db.mux.Unlock()
 
@@ -59,7 +59,7 @@ func (db *DB) writeDB(payload interface{}) error {
 	return nil
 }
 
-func (db *DB) loadDB() (DBStructure, error) {
+func (db *DB) LoadDB() (DBStructure, error) {
 	db.mux.Lock()
 	defer db.mux.Unlock()
 
