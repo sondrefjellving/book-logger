@@ -1,6 +1,7 @@
 package database
 
 import (
+	"encoding/json"
 	"errors"
 	"os"
 	"sync"
@@ -14,7 +15,7 @@ type DB struct {
 }
 
 type DBStructure struct {
-	books []data_types.Book 
+	Books []data_types.Book 
 }
 
 func NewDB(path string) (*DB, error) {
@@ -23,11 +24,8 @@ func NewDB(path string) (*DB, error) {
 		mux: &sync.RWMutex{},
 	}
 
-	return &db, db.setupDB()
-}
-
-func (db *DB) setupDB() error {
-	return db.ensureDB()
+	err := db.ensureDB()
+	return &db, err
 }
 
 func (db *DB) ensureDB() error {
@@ -39,11 +37,42 @@ func (db *DB) ensureDB() error {
 
 func (db *DB) createDB() error {
 	dbStruct := DBStructure{
-		books: make([]data_types.Book, 0),
+		Books: make([]data_types.Book, 0),
 	}	
 	return db.writeDB(dbStruct)
 }
 
 func (db *DB) writeDB(payload interface{}) error {
+	db.mux.Lock()
+	defer db.mux.Unlock()
 
+	dbStruct, err := json.Marshal(payload)
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(db.path, dbStruct, 0600)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
+
+func (db *DB) loadDB() (DBStructure, error) {
+	db.mux.Lock()
+	defer db.mux.Unlock()
+
+	data, err := os.ReadFile(db.path)
+	if err != nil {
+		return DBStructure{}, err 
+	}
+
+	dbStruct := DBStructure{}
+	err = json.Unmarshal(data, &dbStruct)
+	if err != nil {
+		return DBStructure{}, err 
+	}
+
+	return dbStruct, nil
+} 
